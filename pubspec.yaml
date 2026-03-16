@@ -1,6 +1,6 @@
 name: mak_logs
 description: A premium, high-visibility neon debugging toolkit for Flutter. Features color-coded logs, interactive JSON box-drawing, and clickable traceability.
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/MuhammadAhmadAk/mak_logs
 homepage: https://github.com/MuhammadAhmadAk/mak_logs
 

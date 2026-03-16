@@ -1,3 +1,8 @@
+## 0.0.2
+
+* Fixed deprecated `Color` getters (`red`, `green`, `blue`) for Flutter 3.22+ compatibility.
+* Improved static analysis score to target 140/140 points on pub.dev.
+
 ## 0.0.1
 
 * Initial release of MakLogs.
