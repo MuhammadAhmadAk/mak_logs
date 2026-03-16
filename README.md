@@ -1,6 +1,6 @@
 # MakLogs 🚀
 
-[![Pub Version](https://img.shields.io/badge/pub-v1.0.0-blue.svg)](https://pub.dev/packages/mak_logs)
+[![Pub Version](https://img.shields.io/badge/pub-v0.0.1-blue.svg)](https://pub.dev/packages/mak_logs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Flutter](https://img.shields.io/badge/Flutter-%E2%9C%93-brightgreen.svg)](https://flutter.dev)
 [![Style: Lint](https://img.shields.io/badge/style-lint-000000.svg)](https://pub.dev/packages/flutter_lints)
@@ -50,7 +50,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  mak_logs: ^1.0.0
+  mak_logs: ^0.0.1
 ```
 
 Run the command:
