@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mak_logs/mak_logs.dart';
 
 void main() {
-  // Always initialize BEFORE runApp for consistency
+  /// STEP 1: Global Initialization (Optional but Recommended)
+  /// Always call this BEFORE runApp() to set your global theme.
+  /// You can use direct Material Colors or ANSI strings from MakColors.
   MakLog.init(
-    successColor: Colors.orangeAccent, // Direct Material Color!
-    jsonColor: Colors.amber, // Another Material Color
-    successSymbol: '✅',
+    successColor: Colors.orangeAccent, // Using direct Material Color
+    jsonColor: Colors.amber,          // Box UI theme color
+    successSymbol: '✅',               // Custom success icon
   );
 
   runApp(const MyApp());
@@ -30,42 +32,58 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// A comprehensive demo page to showcase all logging capabilities.
 class MakLogsDemoPage extends StatelessWidget {
   const MakLogsDemoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('🚀 MakLogs Demo'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('🚀 MakLogs Demo'),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const _SectionHeader(title: "Simple Logs"),
+            
+            /// Demonstrating Success Log
             _LogButton(
               label: "Log Success",
               icon: Icons.check_circle,
               color: Colors.green,
               onPressed: () => MakLog.success(
                 "User authentication successful!",
-                tag: "AUTH",
+                tag: "AUTH", // Categorize your logs using tags
               ),
             ),
+            
+            /// Demonstrating Error Log
             _LogButton(
               label: "Log Error",
               icon: Icons.error,
               color: Colors.red,
-              onPressed: () =>
-                  MakLog.error("Failed to connect to server", tag: "SVR_404"),
+              onPressed: () => MakLog.error(
+                "Failed to connect to server",
+                tag: "SVR_404",
+              ),
             ),
+            
+            /// Demonstrating Warning Log
             _LogButton(
               label: "Log Warning",
               icon: Icons.warning,
               color: Colors.orange,
-              onPressed: () =>
-                  MakLog.warning("Battery level is below 15%", tag: "SYSTEM"),
+              onPressed: () => MakLog.warning(
+                "Battery level is below 15%",
+                tag: "SYSTEM",
+              ),
             ),
+            
+            /// Demonstrating Info Log
             _LogButton(
               label: "Log Info",
               icon: Icons.info,
@@ -75,6 +93,8 @@ class MakLogsDemoPage extends StatelessWidget {
                 tag: "CACHE",
               ),
             ),
+            
+            /// Demonstrating Debug Log
             _LogButton(
               label: "Log Debug",
               icon: Icons.bug_report,
@@ -84,8 +104,11 @@ class MakLogsDemoPage extends StatelessWidget {
                 tag: "GFX",
               ),
             ),
+            
             const SizedBox(height: 30),
             const _SectionHeader(title: "The Box UI (JSON)"),
+            
+            /// Demonstrating the sophisticated Box UI for structured data.
             _LogButton(
               label: "Log API Response (JSON)",
               icon: Icons.terminal,
@@ -98,42 +121,51 @@ class MakLogsDemoPage extends StatelessWidget {
                   "status": "Online",
                   "stats": {"commits": 1240, "stars": 450},
                 };
-                MakLog.logJson(sampleData, title: "GET_USER_PROFILE");
+                
+                /// Renders the data in an organized, framed box in the console.
+                MakLog.logJson(
+                  sampleData, 
+                  title: "GET_USER_PROFILE", // Title displayed in the top border
+                );
               },
             ),
+            
             const SizedBox(height: 30),
-            const _SectionHeader(title: "Customization"),
+            const _SectionHeader(title: "On-the-fly Customization"),
+            
+            /// Show how logs can be re-configured even after initial setup.
             _LogButton(
               label: "Theme: Neon Cyan",
               icon: Icons.palette,
               color: Colors.cyan,
               onPressed: () {
-                // Initializing with optional parameters
                 MakLog.init(
                   successColor: MakColors.brightCyan,
                   jsonColor: MakColors.brightCyan,
                   successSymbol: '🚀',
                 );
-
+                
                 MakLog.success("Global colors updated to Cyan via init()!");
                 MakLog.logJson({"status": "Initialized cleanly"});
               },
             ),
+            
+            /// Reset to original neon defaults.
             _LogButton(
               label: "Reset to Default",
               icon: Icons.refresh,
               color: Colors.white,
               onPressed: () {
-                // Resetting by calling init() without parameters (or original defaults)
                 MakLog.init(
                   successColor: MakColors.brightGreen,
                   jsonColor: MakColors.magenta,
                   successSymbol: '✅',
                 );
-
+                
                 MakLog.info("Logger reset via init()");
               },
             ),
+            
             const SizedBox(height: 20),
             const Text(
               "Check your debug console to see the magic! ✨",
@@ -147,6 +179,7 @@ class MakLogsDemoPage extends StatelessWidget {
   }
 }
 
+/// Internal helper for section titles in the UI.
 class _SectionHeader extends StatelessWidget {
   final String title;
   const _SectionHeader({required this.title});
@@ -167,6 +200,7 @@ class _SectionHeader extends StatelessWidget {
   }
 }
 
+/// A custom styled button for triggering logs in the demo.
 class _LogButton extends StatelessWidget {
   final String label;
   final IconData icon;
@@ -189,8 +223,8 @@ class _LogButton extends StatelessWidget {
         icon: Icon(icon, color: Colors.white),
         label: Text(label, style: const TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: color.withValues(alpha: 0.2),
-          side: BorderSide(color: color, width: 1.5),
+          backgroundColor: color.withValues(alpha: 0.2), // Highlighing with subtle background
+          side: BorderSide(color: color, width: 1.5),  // Bold border to match neon theme
           padding: const EdgeInsets.symmetric(vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
